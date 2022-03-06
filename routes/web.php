@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [TweetController::class, 'index']);
+Route::get('/get-ajax', [TweetController::class, 'ajax']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
