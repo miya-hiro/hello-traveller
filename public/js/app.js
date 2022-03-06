@@ -5474,25 +5474,46 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 console.log('weather用jsココカラ');
-$('[name = "destination"]').on('change', function () {
-  var destination = $(this).val();
-  console.log('changeイベント');
-  console.log(destination);
-  $.ajax({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    },
-    url: '/get-ajax',
-    type: 'GET',
-    data: {
-      'destination': destination
-    },
-    dataType: 'json'
-  }).done(function (result) {
-    console.log("success");
-    console.log(result);
-  }).fail(function () {
-    console.log("failed");
+$(function () {
+  $('[name = "destination"]').on('change', function () {
+    var destination = $(this).val(); // console.log('changeイベント');
+    // console.log(destination);
+
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: '/get-ajax',
+      type: 'GET',
+      data: {
+        'destination': destination
+      },
+      dataType: 'json'
+    }).done(function (tweetList) {
+      // console.log("success");
+      console.log(tweetList);
+      var $tweetWrap = $('#js_tweetWrap');
+      console.log($tweetWrap.html());
+      $tweetWrap.html(""); //前回の取得内容をリセット
+
+      $.each(tweetList.tweetList, function (index, tweet) {
+        // console.log(tweet);
+        // console.log(tweet.mediaUrl);
+        if (tweet.mediaUrl) {
+          console.log('aるよ');
+          var image = tweet.mediaUrl;
+        } else {
+          console.log('ないよ');
+          image = '';
+        }
+
+        var block = '<div class="col">' + '<p>アイコン：<img src="' + tweet.user.profile_image_url_https + '"></p>' + '<p>画像：<img src="' + image + '"></p>' + '<p>ツイート内容：' + tweet.text + '</p>' + '</div>';
+        console.log(block);
+        $tweetWrap.append(block);
+      });
+    }).fail(function () {
+      console.log("failed");
+    });
   });
 });
 

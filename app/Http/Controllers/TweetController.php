@@ -46,17 +46,16 @@ class TweetController extends Controller
         $tweetList = array_slice($tweetList, 0, $this->getTweetNum);
         // dd($tweetList);
 
-        return view('home', compact('tweetList'));
+        return view('weather.weather', compact('tweetList'));
     }
 
-    public function ajax($destination)
-    {
+    public function ajax(Request $request)
+    {//dd($request->destination);
         $connection = new TwitterOAuth(config('twitter.api_key'), config('twitter.api_key_secret'), config('twitter.access_token'), config('twitter.access_token_secret'));
-        // $tweets_params = ['screen_name' => 'mchian3' ,'count' => '20'];
 
         $tweets_params = [
-            'q' => $destination . '天気 filter:images',
-            'result_type' => 'recent',
+            'q' => $request->destination . '天気 filter:images',
+            // 'result_type' => 'recent',
             'count' => $this->getTweetNum
         ];
 

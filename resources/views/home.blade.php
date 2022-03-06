@@ -9,25 +9,6 @@
 
     <title>Laravel</title>
 
-    <div>
-        <select name="destination" id="destination">
-            <option value="sapporo">札幌</option>
-            <option value="osaka">大阪</option>
-            <option value="okinawa">沖縄</option>
-        </select>
-    </div>
-
-    @foreach($tweetList as $status)
-    <a href="https://twitter.com/{{ $status->user->screen_name }}/status/{{ $status->id}}" target="_blank" >
-        <div>
-            <p>アイコン：<img src="{{ $status->user->profile_image_url }}"/></p>
-            <p>ツイート内容： {{ $status->text }} </p>
-            <p>id：{{ $status->id }} </p>
-            <p>画像：<img src="{{ $status->mediaUrl ?? 'ないよ'}}" style="width:200px"></p>
-        </div>
-    </a>
-    @endforeach
-
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -426,6 +407,7 @@
 </head>
 
 <body class="antialiased">
+
     <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
         @if (Route::has('login'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
@@ -440,6 +422,7 @@
             @endauth
         </div>
         @endif
+
 
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
