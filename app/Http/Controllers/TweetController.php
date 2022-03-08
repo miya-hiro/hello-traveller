@@ -12,77 +12,91 @@ class TweetController extends Controller
 
     public function __construct()
     {
-        $this->getTweetNum = 5;
+        $this->getTweetNum = 10;
     }
 
     public function index(Type $var = null)
     {
-        $connection = new TwitterOAuth(config('twitter.api_key'), config('twitter.api_key_secret'), config('twitter.access_token'), config('twitter.access_token_secret'));
-        // $tweets_params = ['screen_name' => 'mchian3' ,'count' => '20'];
-
-        $tweets_params = [
-            'q' => '天気 filter:images',
-            'result_type' => 'recent',
-            'count' => $this->getTweetNum
-        ];
-
-        $tweets = $connection->get('/search/tweets', $tweets_params);
-
-        $tweetList = [];
-        $i = 0;
-        foreach ($tweets as $tweet) {
-            foreach ($tweet as $t) {
-                $mediaExist = $t->extended_entities ?? '';
-                if ($mediaExist) {
-                    $media = $t->extended_entities->media;
-                    foreach ($media as $m) {
-                        $t->mediaUrl = $m->media_url_https;
-                    }
-                }
-
-                $tweetList[] = $t;
-            }
-        }
-        $tweetList = array_slice($tweetList, 0, $this->getTweetNum);
-        // dd($tweetList);
-
-        return view('weather.weather', compact('tweetList'));
+        return view('weather.weather');
     }
 
     public function ajax(Request $request)
-    {//dd($request->destination);
-        $connection = new TwitterOAuth(config('twitter.api_key'), config('twitter.api_key_secret'), config('twitter.access_token'), config('twitter.access_token_secret'));
+    {
+        /**
+         * ここから天気
+         */
+        $lat = config('const.' . $request->destination . '.lat');
+        $lon = config('const.' . $request->destination . '.lon');
+        $destination = $request->destination;
 
-        $tweets_params = [
-            'q' => $request->destination . '天気 filter:images',
-            // 'result_type' => 'recent',
-            'count' => $this->getTweetNum
-        ];
+        $appid = config('weather.api_key');
 
-        $tweets = $connection->get('/search/tweets', $tweets_params);
+        $url = "http://api.openweathermap.org/data/2.5/weather/?lat={$lat}&lon={$lon}&appid={$appid}";
 
-        $tweetList = [];
-        $i = 0;
-        foreach ($tweets as $tweet) {
-            foreach ($tweet as $t) {
-                $mediaExist = $t->extended_entities ?? '';
-                if ($mediaExist) {
-                    $media = $t->extended_entities->media;
-                    foreach ($media as $m) {
-                        $t->mediaUrl = $m->media_url_https;
-                    }
-                }
+        //天気取得に必要なデータ取得URL
+        // $url = "http://api.openweathermap.org/geo/1.0/direct?q=Sapporo&limit=5&appid={$appid}";
 
-                $tweetList[] = $t;
-            }
-        }
-        $tweetList = array_slice($tweetList, 0, $this->getTweetNum);
-        // dd($tweetList);
+        $weather_json = file_get_contents($url);
+        $weather_array = json_decode($weather_json, true);
+
+        $weather = [];
+        $weather['weather'] = $weather_array['weather'][0]['main'];
+        $weather['icon'] = $weather_array['weather'][0]['icon'];
+
+
+
+        /**
+         * ここからツイッター取得
+         */
+        // $connection = new TwitterOAuth(config('twitter.api_key'), config('twitter.api_key_secret'), config('twitter.access_token'), config('twitter.access_token_secret'));
+
+        //指定ワード
+        // $q =  $destination . ' 天気 -相互 filter:images -#相互RT exclude:retweets -#OpenWeatherMap -from:mint_tanpopo';
+
+        $tweetWeatherList = $this->getTweetByKeywords($destination, '#イマソラ');
+
+        $tweetFoodList = $this->getTweetByKeywords($destination, '美味しい');
 
         return response()->json(
             [
-                'tweetList' => $tweetList,
+                'weather' => $weather,
+                'tweetWeatherList' => $tweetWeatherList,
+                'tweetFoodList' => $tweetFoodList,
             ]
         );
+    }
+
+    public function getTweetByKeywords($destination, $keyword)
+    {
+        $connection = new TwitterOAuth(config('twitter.api_key'), config('twitter.api_key_secret'), config('twitter.access_token'), config('twitter.access_token_secret'));
+
+        $q =  $destination . $keyword . ' -相互 filter:images -#相互RT exclude:retweets';
+        // dd($q);
+
+        $tweets_params = [
+            'q' => $q,
+            'count' => $this->getTweetNum,
+            'tweet_mode' => 'extended', //ここ！(text->full_text) 画像表示が直る
+        ];
+        // dd($tweets_params);
+        $tweetList = $connection->get('/search/tweets', $tweets_params)->statuses;
+        // dd($tweetList);
+        foreach ($tweetList as $tweet) {
+            $tweet->mediaUrl = '画像なし'; //初期値
+
+            //画像urlを取得
+            $mediaExist = $tweet->extended_entities->media ?? '';
+
+            if ($mediaExist) {
+                $media = $tweet->extended_entities->media;
+                foreach ($media as $m) {
+                    if ($m->type === 'photo') {
+                        $tweet->mediaUrl = $m->media_url_https;
+                    }
+                }
+            }
+        }
+
+        return $tweetList;
     }
 }
