@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WeatherController::class, 'index']);
 Route::get('/get-ajax', [WeatherController::class, 'ajax']);
 
-Auth::routes();
+Route::get('/axios', [WeatherController::class, 'axiosIndex']);
+Route::get('/get-axios', [WeatherController::class, 'axios']);
+
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

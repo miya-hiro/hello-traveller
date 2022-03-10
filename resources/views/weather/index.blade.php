@@ -27,7 +27,8 @@
 
           <!-- ここからAjaxツイート -->
           <div class="container-fluid">
-            <h2>今の天気</h2>
+            <h1>jQuery使用</h1>
+          <h2>今の天気</h2>
             <div id="js_weatherWrap" class="row">
               <div class="col">
               Column

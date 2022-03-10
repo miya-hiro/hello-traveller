@@ -104,4 +104,9 @@ class WeatherController extends Controller
 
         return $tweetList;
     }
+
+    public function axiosIndex()
+    {
+        return view('weather.axios-index');
+    }
 }
