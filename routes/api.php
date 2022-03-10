@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\TwitterController;
+use App\Http\Controllers\Api\WeatherController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//頭にapiがつく
+Route::get('/tweets', [TwitterController::class, 'getTweets']); //get-とかいらない
+Route::get('/weather', [WeatherController::class, 'getWeather']); //get-とかいらない
+
+// Route::get('/tweets/{id}', [WeatherController::class, 'getTweet']); //get-とかいらない
+
+// //もしpostするなら
+// Route::post('/tweets', [WeatherController::class, 'storeTweets']); //get-とかいらない
+// //もし削除するなら
+// Route::delete('/tweets/{id}', [WeatherController::class, 'deleteTweet']); //get-とかいらない
+
+// RESTful api 設計のプラクティス
