@@ -27,7 +27,7 @@ class WeatherController extends Controller
         /**
          * ここから天気
          */
-        $weather = $this->getWeahter($destination);
+        $weather = $this->getWeather($destination);
 
         /**
          * ここからツイッター取得
