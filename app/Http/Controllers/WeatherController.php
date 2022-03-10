@@ -16,8 +16,8 @@ class WeatherController extends Controller
         return view('weather.index');
     }
 
-    public function axiosIndex()
-    {
-        return view('weather.axios-index');
-    }
+    // public function axiosIndex()
+    // {
+    //     return view('weather.axios-index');
+    // }
 }
