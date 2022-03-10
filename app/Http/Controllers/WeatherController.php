@@ -27,6 +27,30 @@ class WeatherController extends Controller
         /**
          * ここから天気
          */
+        $weather = $this->getWeahter($destination);
+
+        /**
+         * ここからツイッター取得
+         */
+
+        //指定ワード
+        // $q =  $destination . ' 天気 -相互 filter:images -#相互RT exclude:retweets -#OpenWeatherMap -from:mint_tanpopo';
+
+        $tweetWeatherList = $this->getTweetByKeywords($destination, '#イマソラ');
+
+        $tweetFoodList = $this->getTweetByKeywords($destination, '美味しい');
+
+        return response()->json(
+            [
+                'weather' => $weather,
+                'tweetWeatherList' => $tweetWeatherList,
+                'tweetFoodList' => $tweetFoodList,
+            ]
+        );
+    }
+
+    public function getWeather($destination)
+    {
         $lat = config('const.' . $destination . '.lat');
         $lon = config('const.' . $destination . '.lon');
 
@@ -44,27 +68,7 @@ class WeatherController extends Controller
         $weather['weather'] = $weather_array['weather'][0]['main'];
         $weather['icon'] = $weather_array['weather'][0]['icon'];
 
-
-
-        /**
-         * ここからツイッター取得
-         */
-        // $connection = new TwitterOAuth(config('twitter.api_key'), config('twitter.api_key_secret'), config('twitter.access_token'), config('twitter.access_token_secret'));
-
-        //指定ワード
-        // $q =  $destination . ' 天気 -相互 filter:images -#相互RT exclude:retweets -#OpenWeatherMap -from:mint_tanpopo';
-
-        $tweetWeatherList = $this->getTweetByKeywords($destination, '#イマソラ');
-
-        $tweetFoodList = $this->getTweetByKeywords($destination, '美味しい');
-
-        return response()->json(
-            [
-                'weather' => $weather,
-                'tweetWeatherList' => $tweetWeatherList,
-                'tweetFoodList' => $tweetFoodList,
-            ]
-        );
+        return $weather;
     }
 
     public function getTweetByKeywords($destination, $keyword)
