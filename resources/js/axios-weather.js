@@ -2,7 +2,7 @@ console.log('weather用 axions ココカラ');
 
 new Vue(
   {
-    el: '#main',
+    el: '#show-axios',
     data: {
       parameters: []
     },
