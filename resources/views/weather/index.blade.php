@@ -25,50 +25,50 @@
               <option value="沖縄">OKINAWA</option>
             </select>
 
-          <!-- ここからAjaxツイート -->
-          <div class="container-fluid">
-            <h1>jQuery使用</h1>
-          <h2>今の天気</h2>
-            <div id="js_weatherWrap" class="row">
-              <div class="col">
-              Column
+            <!-- ここからAjax -->
+            <div class="container-fluid">
+              <h1>jQuery使用</h1>
+              <h2>今の天気</h2>
+              <div id="js_weatherWrap" class="row">
+                <div class="col">
+                  Column
+                </div>
+                <div class="col">
+                  Column
+                </div>
               </div>
-              <div class="col">
-              Column
+              <h2>天気関連ツイート</h2>
+              <div id="js_tweetWeatherWrap" class="row">
+                <div class="col">
+                  Column
+                </div>
+                <div class="col">
+                  Column
+                </div>
+                <div class="col">
+                  Column
+                </div>
+              </div>
+              <h2>食べ物関連ツイート</h2>
+              <div id="js_tweetFoodWrap" class="row">
+                <div class="col">
+                  Column
+                </div>
+                <div class="col">
+                  Column
+                </div>
+                <div class="col">
+                  Column
+                </div>
               </div>
             </div>
-            <h2>天気関連ツイート</h2>
-            <div id="js_tweetWeatherWrap" class="row">
-              <div class="col">
-              Column
-              </div>
-              <div class="col">
-              Column
-              </div>
-              <div class="col">
-              Column
-              </div>
-            </div>
-            <h2>食べ物関連ツイート</h2>
-            <div id="js_tweetFoodWrap" class="row">
-              <div class="col">
-              Column
-              </div>
-              <div class="col">
-              Column
-              </div>
-              <div class="col">
-              Column
-              </div>
-            </div>
-        </div>
-    </div>
-    <!-- ここまでAjaxツイート -->
-
           </div>
+          <!-- ここまでAjax -->
+
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>
 @endsection

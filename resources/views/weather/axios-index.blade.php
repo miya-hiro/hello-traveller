@@ -25,7 +25,7 @@
               <option value="沖縄">OKINAWA</option>
             </select>
 
-            <!-- ここからAjaxツイート -->
+            <!-- ここからAjax -->
             <div class="container-fluid">
               <h1>axios使用</h1>
               <h2>今の天気</h2>
@@ -63,7 +63,7 @@
               </div>
             </div>
           </div>
-          <!-- ここまでAjaxツイート -->
+          <!-- ここまでAjax -->
 
         </div>
       </div>
