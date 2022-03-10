@@ -5500,7 +5500,7 @@ $(function () {
       // console.log('天気ここから');
       // console.log($weatherWrap);
 
-      var block = '<div class="col">' + '<p>今日のお天気：' + response.weather.weather + '</p>' + '<p><img src="https://openweathermap.org/img/wn/' + response.weather.icon + '@2x.png"></p>' + '</div>'; // console.log(block);
+      var block = '<div class="col">' + '<p>今のお天気：' + response.weather.weather + '</p>' + '<p><img src="https://openweathermap.org/img/wn/' + response.weather.icon + '@2x.png"></p>' + '</div>'; // console.log(block);
 
       $weatherWrap.append(block); //
       //ここからtweet処理
@@ -5516,13 +5516,6 @@ $(function () {
       $.each(response.tweetWeatherList, function (index, tweet) {
         // console.log(tweet);
         // console.log(tweet.mediaUrl);
-        // if (tweet.mediaUrl) {
-        //   // console.log('あるよ');
-        //   var image = tweet.mediaUrl;
-        // } else {
-        //   // console.log('ないよ');
-        //   image = '';
-        // }
         var block = '<div class="col">' + '<a href="https://twitter.com/' + tweet.user.screen_name + '/status/' + tweet.id_str + '" class="test-dark" target="_blank">' // + '<p>アイコン：<img src="' + tweet.user.profile_image_url_https + '"></p>'
         + '<p>画像：<img src="' + tweet.mediaUrl + '" class="img-fluid"></p>' + '<p>ツイート内容：' + tweet.full_text + '</p></a>' + '</div>'; // console.log(block);
 
@@ -5537,13 +5530,6 @@ $(function () {
       $tweetFoodWrap.html(""); //前回の取得内容をリセット
 
       $.each(response.tweetFoodList, function (index, tweet) {
-        // if (tweet.mediaUrl) {
-        //   // console.log('aるよ');
-        //   var image = tweet.mediaUrl;
-        // } else {
-        //   // console.log('ないよ');
-        //   image = '';
-        // }
         var block = '<div class="col">' + '<a href="https://twitter.com/' + tweet.user.screen_name + '/status/' + tweet.id_str + '" class="test-dark" target="_blank">' // + '<p>アイコン：<img src="' + tweet.user.profile_image_url_https + '"></p>'
         + '<p>画像：<img src="' + tweet.mediaUrl + '" class="img-fluid"></p>' + '<p>ツイート内容：' + tweet.full_text + '</p></a>' + '</div>'; // console.log(block);
 
