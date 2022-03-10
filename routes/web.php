@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [TweetController::class, 'index']);
-Route::get('/get-ajax', [TweetController::class, 'ajax']);
+Route::get('/', [WeatherController::class, 'index']);
+Route::get('/get-ajax', [WeatherController::class, 'ajax']);
 
 Auth::routes();
 

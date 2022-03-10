@@ -6,7 +6,7 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 
 use Illuminate\Http\Request;
 
-class TweetController extends Controller
+class WeatherController extends Controller
 {
     private $getTweetNum;
 

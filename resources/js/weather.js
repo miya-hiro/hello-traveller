@@ -30,7 +30,7 @@ $(function () {
         // console.log($weatherWrap);
 
         var block = '<div class="col">'
-          + '<p>今日のお天気：' + response.weather.weather + '</p>'
+          + '<p>今のお天気：' + response.weather.weather + '</p>'
           + '<p><img src="https://openweathermap.org/img/wn/' + response.weather.icon + '@2x.png"></p>'
           + '</div>';
         // console.log(block);
