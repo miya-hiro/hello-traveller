@@ -26,9 +26,8 @@
             </select>
 
           <!-- ここからAjaxツイート -->
-          <h2>Ajax表示</h2>
           <div class="container-fluid">
-            <h3>今の天気</h3>
+            <h2>今の天気</h2>
             <div id="js_weatherWrap" class="row">
               <div class="col">
               Column
@@ -37,7 +36,7 @@
               Column
               </div>
             </div>
-            <h3>天気関連ツイート</h3>
+            <h2>天気関連ツイート</h2>
             <div id="js_tweetWeatherWrap" class="row">
               <div class="col">
               Column
@@ -49,7 +48,7 @@
               Column
               </div>
             </div>
-            <h3>食べ物関連ツイート</h3>
+            <h2>食べ物関連ツイート</h2>
             <div id="js_tweetFoodWrap" class="row">
               <div class="col">
               Column
