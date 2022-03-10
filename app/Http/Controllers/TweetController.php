@@ -17,17 +17,18 @@ class TweetController extends Controller
 
     public function index(Type $var = null)
     {
-        return view('weather.weather');
+        return view('weather.index');
     }
 
     public function ajax(Request $request)
     {
+        $destination = $request->destination;
+
         /**
          * ここから天気
          */
-        $lat = config('const.' . $request->destination . '.lat');
-        $lon = config('const.' . $request->destination . '.lon');
-        $destination = $request->destination;
+        $lat = config('const.' . $destination . '.lat');
+        $lon = config('const.' . $destination . '.lon');
 
         $appid = config('weather.api_key');
 
