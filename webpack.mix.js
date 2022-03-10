@@ -11,10 +11,12 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js(['resources/js/app.js', 'resources/js/weather.js'], 'public/js')
-        .autoload({
+mix.js(['resources/js/app.js',
+    'resources/js/weather.js',
+    'resources/js/axios-weather.js'], 'public/js')
+    .autoload({
         "jquery": ['$', 'window.jQuery'],
-        })
+    })
     .vue()
     .sass('resources/sass/app.scss', 'public/css')
     .version();

@@ -26,7 +26,7 @@
             </select>
 
             <!-- ここからAjax -->
-            <div class="container-fluid">
+            <div id="show-axios" class="container-fluid">
               <h1>axios使用</h1>
               <h2>今の天気</h2>
               <div id="js_weatherWrap" class="row">
