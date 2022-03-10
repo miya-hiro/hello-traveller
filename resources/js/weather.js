@@ -54,14 +54,6 @@ $(function () {
           // console.log(tweet);
           // console.log(tweet.mediaUrl);
 
-          // if (tweet.mediaUrl) {
-          //   // console.log('あるよ');
-          //   var image = tweet.mediaUrl;
-          // } else {
-          //   // console.log('ないよ');
-          //   image = '';
-          // }
-
           var block = '<div class="col">'
             + '<a href="https://twitter.com/' + tweet.user.screen_name + '/status/' + tweet.id_str + '" class="test-dark" target="_blank">'
             // + '<p>アイコン：<img src="' + tweet.user.profile_image_url_https + '"></p>'
@@ -85,14 +77,6 @@ $(function () {
         $tweetFoodWrap.html(""); //前回の取得内容をリセット
 
         $.each(response.tweetFoodList, function (index, tweet) {
-
-          // if (tweet.mediaUrl) {
-          //   // console.log('aるよ');
-          //   var image = tweet.mediaUrl;
-          // } else {
-          //   // console.log('ないよ');
-          //   image = '';
-          // }
 
           var block = '<div class="col">'
             + '<a href="https://twitter.com/' + tweet.user.screen_name + '/status/' + tweet.id_str + '" class="test-dark" target="_blank">'
