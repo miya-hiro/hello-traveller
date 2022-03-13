@@ -27,7 +27,6 @@
 
             <!-- ここからAjax -->
             <div class="container-fluid">
-              <h1>jQuery使用</h1>
               <h2>今の天気</h2>
               <div id="js_weatherWrap" class="row">
                 <div class="col">
@@ -65,10 +64,12 @@
           </div>
           <!-- ここまでAjax -->
 
-        </div>
+          <!-- ここからAxios -->
+        <!-- ここまでAxios -->
       </div>
     </div>
   </div>
+</div>
 </div>
 </div>
 @endsection

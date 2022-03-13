@@ -21,7 +21,7 @@ class TwitterController extends Controller
     }
 
     public function getTweets(Request $request)
-    {
+    {//dd($request->destination);
         $destination = $request->destination;
 
         //指定ワード
