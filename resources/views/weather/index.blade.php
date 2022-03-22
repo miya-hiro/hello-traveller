@@ -72,7 +72,8 @@
                     @change="getData"
                     class="form-select form-select-lg mb-3" aria-label=".form-select-lg select example">
               <option v-for="op in options" 
-                      v-bind:value=op.value>@{{op.text}}</option>
+                      v-bind:value=op.value
+                      :key="op">@{{op.text}}</option>
             </select>
 
             <div class="container-fluid">
@@ -82,11 +83,13 @@
                    class="row">
               </div>
 
+              <!-- @todo templateタグ使えるか？？ -->
               <h2>天気関連ツイート</h2>
               <div class="row">
                 <div v-bind="twitterWeather"
                      v-html="twitterWeather"
                      v-for="twitterWeather of twitterWeathers"
+                     :key="twitterWeather"
                      class="col">
                 </div>
               </div>
@@ -96,6 +99,7 @@
                 <div v-bind="twitterFood"
                      v-html="twitterFood"
                      v-for="twitterFood of twitterFoods"
+                     :key="twitterFood"
                      class="col">
                 </div>
               </div>
