@@ -5504,14 +5504,13 @@ new Vue({
 
         }
       }).then(function (response) {
-        console.log('tweitterレスポンス');
-        console.log(response.data.food);
-        console.log(response.data.weather);
-
+        // console.log('tweitterレスポンス');
+        // console.log(response.data.food);
+        // console.log(response.data.weather);
         var makeTweetHtml = function makeTweetHtml(value, index) {
           console.log('makehtml関数内');
           console.log(value);
-          targetDom.push('<div class="col"><a href="https://twitter.com/' + value.user.screen_name + '/status/' + value.id_str + '" class="test-dark" target="_blank"><p>画像：<img src="' + value.mediaUrl + '" class="img-fluid"></p><p>ツイート内容：' + value.full_text + '</p></a></div>');
+          targetDom.push('<a href="https://twitter.com/' + value.user.screen_name + '/status/' + value.id_str + '" class="test-dark" target="_blank"><p>画像：<img src="' + value.mediaUrl + '" class="img-fluid"></p><p>ツイート内容：' + value.full_text + '</p></a>');
         }; //天気
 
 
@@ -5523,11 +5522,7 @@ new Vue({
         me.twitterFoods = []; //配列にするのが重要！pushのため
 
         var targetDom = me.twitterFoods;
-        response.data.food.forEach(makeTweetHtml); // response.data.food.forEach((value, index) => {
-        //   // console.log("value", value);
-        //   // console.log("index", index);
-        //   me.twitterFoods.push('<div class="col"><a href="https://twitter.com/' + value.user.screen_name + '/status/' + value.id_str + '" class="test-dark" target="_blank"><p>画像：<img src="' + value.mediaUrl + '" class="img-fluid"></p><p>ツイート内容：' + value.full_text + '</p></a></div>');
-        // });
+        response.data.food.forEach(makeTweetHtml);
       })["catch"](function (response) {
         console.log(response);
         console.log('inキャッチ');

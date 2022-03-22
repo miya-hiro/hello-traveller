@@ -65,29 +65,39 @@
           <!-- ここまでAjax -->
 
           <!-- ここからAxios -->
-          <div class="card-text">
+          <div id="axios-practice" class="card-text">
             <div>ajax</div>
-            <select name="destination" class="form-select form-select-lg mb-3" aria-label=".form-select-lg select example">
-              <option selected>Open this select menu</option>
-              <option value="札幌">SAPPORO</option>
-              <option value="東京">TOKYO</option>
-              <option value="大阪">OSAKA</option>
-              <option value="沖縄">OKINAWA</option>
+            <select v-model="selected"
+                    name="destination"
+                    @change="getData"
+                    class="form-select form-select-lg mb-3" aria-label=".form-select-lg select example">
+              <option v-for="op in options" 
+                      v-bind:value=op.value>@{{op.text}}</option>
             </select>
 
             <div class="container-fluid">
               <h2>今の天気</h2>
-              <div v-bind="weather" class="row">
-
+              <div v-bind="weather"
+                   v-html="weather"
+                   class="row">
               </div>
 
               <h2>天気関連ツイート</h2>
-              <div v-bind="twitterWeathers" class="row">
-                <div v-html="twitterFood" v-for="twitterWeather of twitterWeathers"></div>
+              <div class="row">
+                <div v-bind="twitterWeather"
+                     v-html="twitterWeather"
+                     v-for="twitterWeather of twitterWeathers"
+                     class="col">
+                </div>
               </div>
+
               <h2>食べ物関連ツイート</h2>
-              <div v-bind="twitterFoods" class="row">
-                <div v-html="twitterFood" v-for="twitterFood of twitterFoods"></div>
+              <div class="row">
+                <div v-bind="twitterFood"
+                     v-html="twitterFood"
+                     v-for="twitterFood of twitterFoods"
+                     class="col">
+                </div>
               </div>
             </div>
           </div>
