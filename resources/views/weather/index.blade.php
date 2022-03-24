@@ -71,33 +71,30 @@
                     name="destination"
                     @change="getData"
                     class="form-select form-select-lg mb-3" aria-label=".form-select-lg select example">
-              <option v-for="op in options" 
+              <option v-for="op in options"
                       v-bind:value=op.value
                       :key="op">@{{op.text}}</option>
             </select>
 
             <div class="container-fluid">
-              <h2>今の天気</h2>
-              <div v-bind="weather"
-                   v-html="weather"
+              <h2 v-if="weather">今の天気</h2>
+              <div v-html="weather"
                    class="row">
               </div>
 
               <!-- @todo templateタグ使えるか？？ -->
-              <h2>天気関連ツイート</h2>
+              <h2 v-if="twitterWeathers.length">天気関連ツイート</h2>
               <div class="row">
-                <div v-bind="twitterWeather"
-                     v-html="twitterWeather"
+                <div v-html="twitterWeather"
                      v-for="twitterWeather of twitterWeathers"
                      :key="twitterWeather"
                      class="col">
                 </div>
               </div>
 
-              <h2>食べ物関連ツイート</h2>
+              <h2 v-if="twitterFoods.length">食べ物関連ツイート</h2>
               <div class="row">
-                <div v-bind="twitterFood"
-                     v-html="twitterFood"
+                <div v-html="twitterFood"
                      v-for="twitterFood of twitterFoods"
                      :key="twitterFood"
                      class="col">

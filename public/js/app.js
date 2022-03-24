@@ -5442,11 +5442,9 @@ new Vue({
   data: {
     selected: '',
     //初期に選ばれているoption。v-model="selected" と連動
-    weather: 'ここにデータが入ります',
-    twitterWeathers: 'ここにデータが入ります',
-    twitterWeather: '子データです',
-    twitterFoods: 'ここにデータが入ります',
-    twitterFood: '子データです',
+    weather: '',
+    twitterWeathers: [],
+    twitterFoods: [],
     options: [{
       text: 'Open this select menu',
       value: ''
@@ -5514,12 +5512,12 @@ new Vue({
         }; //天気
 
 
-        me.twitterWeathers = []; //配列にするのが重要！pushのため
+        me.twitterWeathers = []; //リセット
 
         var targetDom = me.twitterWeathers;
         response.data.weather.forEach(makeTweetHtml); //食べ物
 
-        me.twitterFoods = []; //配列にするのが重要！pushのため
+        me.twitterFoods = []; //リセット
 
         var targetDom = me.twitterFoods;
         response.data.food.forEach(makeTweetHtml);
