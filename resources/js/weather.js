@@ -82,4 +82,5 @@ $(function () {
         console.log("failed");
       })
   }); //changeイベントここまで
+
 })
