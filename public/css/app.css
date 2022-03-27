@@ -11286,3 +11286,12 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.effect-fade {
+  opacity: 0;
+  transform: translate(0, 45px);
+  transition: all 300ms;
+}
+.effect-fade.effect-on {
+  opacity: 1;
+  transform: translate(0, 0);
+}

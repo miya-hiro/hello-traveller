@@ -5436,7 +5436,11 @@ Vue.component('example-component', (__webpack_require__(/*! ./components/Example
   \***************************************/
 /***/ (() => {
 
-console.log('weather用 axions ココカラ');
+console.log('weather用 JS ココカラ');
+/**
+ * for Vue
+ */
+
 new Vue({
   el: '#axios-practice',
   data: {
@@ -5471,6 +5475,12 @@ new Vue({
     getWeather: function getWeather(v) {
       var me = this; //!!!!!
 
+      var parentDiv = document.getElementById("js-weather");
+
+      if (parentDiv.classList.contains("effect-on")) {
+        parentDiv.classList.remove("effect-on");
+      }
+
       axios({
         method: 'GET',
         url: '/api/weather',
@@ -5480,19 +5490,35 @@ new Vue({
 
         }
       }).then(function (response) {
-        console.log('weatherレスポンス');
-        console.log(response.data.data);
-        console.log(response.data.icon);
+        // console.log('weatherレスポンス');
+        // console.log(response.data.data);
+        // console.log(response.data.icon);
         me.weather = '<div class="col">' + '<p>今のお天気：' + response.data.data + '</p>' + '<p><img src="https://openweathermap.org/img/wn/' + response.data.icon + '@2x.png"></p>' + '</div>';
       })["catch"](function (response) {
-        console.log(response);
-        console.log('inキャッチ');
+        // console.log(response);
+        // console.log('inキャッチ');
         me.weather = 'エラーが発生しました';
+      })["finally"](function () {
+        parentDiv.classList.add("effect-on");
       });
     },
     getTweets: function getTweets(v) {
       var me = this; //!!!!!
 
+      var twitterWeatherWrapper = document.getElementById("js-twitterWeatherWrap");
+      var twitterFoodWrapper = document.getElementById("js-twitterFoodWrap"); //リセット
+
+      if (twitterWeatherWrapper.classList.contains("effect-on")) {
+        twitterWeatherWrapper.classList.remove("effect-on");
+      }
+
+      me.twitterWeathers = [];
+
+      if (twitterFoodWrapper.classList.contains("effect-on")) {
+        twitterFoodWrapper.classList.remove("effect-on");
+      }
+
+      me.twitterFoods = [];
       axios({
         method: 'GET',
         url: '/api/tweets',
@@ -5505,21 +5531,28 @@ new Vue({
         // console.log('tweitterレスポンス');
         // console.log(response.data.food);
         // console.log(response.data.weather);
+        if (!twitterWeatherWrapper.classList.contains("effect-on")) {
+          twitterWeatherWrapper.classList.add("effect-on");
+        }
+
+        if (!twitterFoodWrapper.classList.contains("effect-on")) {
+          twitterFoodWrapper.classList.add("effect-on");
+        }
+
         var makeTweetHtml = function makeTweetHtml(value, index) {
-          console.log('makehtml関数内');
-          console.log(value);
-          targetDom.push('<a href="https://twitter.com/' + value.user.screen_name + '/status/' + value.id_str + '" class="test-dark" target="_blank"><p>画像：<img src="' + value.mediaUrl + '" class="img-fluid"></p><p>ツイート内容：' + value.full_text + '</p></a>');
+          // console.log('makehtml関数内');
+          // console.log(targetDom);
+          targetProperty.push('<a href="https://twitter.com/' + value.user.screen_name + '/status/' + value.id_str + '" class="test-dark" target="_blank"><p><img src="' + value.mediaUrl + '" class="img-fluid"></p><p>' + value.full_text + '</p></a>'); // var element = targetProperty[index];
+          // console.log('makehtml関数内');
+          // console.log(element);
+          // element.fade = "effect-on";
         }; //天気
 
 
-        me.twitterWeathers = []; //リセット
-
-        var targetDom = me.twitterWeathers;
+        var targetProperty = me.twitterWeathers;
         response.data.weather.forEach(makeTweetHtml); //食べ物
 
-        me.twitterFoods = []; //リセット
-
-        var targetDom = me.twitterFoods;
+        var targetProperty = me.twitterFoods;
         response.data.food.forEach(makeTweetHtml);
       })["catch"](function (response) {
         console.log(response);
@@ -5527,6 +5560,7 @@ new Vue({
         me.twitterWeathers = 'エラーが発生しました'; //食べ物
 
         me.twitterFoods = 'エラーが発生しました';
+      })["finally"](function () {// parentDiv.classList.add("effect-on")
       });
     }
   }

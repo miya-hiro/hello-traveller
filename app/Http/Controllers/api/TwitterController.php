@@ -41,7 +41,7 @@ class TwitterController extends Controller
 
     private function getTweetByKeywords($destination, $keyword)
     {
-        $q =  $destination . $keyword . ' -相互 filter:images -#相互RT exclude:retweets';
+        $q =  $destination . $keyword . ' -相互 -手押し filter:images -#相互RT exclude:retweets';
         // dd($q);
 
         $tweets_params = [
