@@ -9,7 +9,7 @@ return [
 
     'twitter' => [
       'settings' => [
-        'getNum' => 10, //環境ごとに変わるなら
+        'getNum' => 12, //環境ごとに変わるなら
       ],
       'key' =>  env('TWITTER_API_KEY'),
       'key_secret' =>  env('TWITTER_API_KEY_SECRET'),

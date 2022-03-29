@@ -5528,9 +5528,10 @@ new Vue({
 
         }
       }).then(function (response) {
-        // console.log('tweitterレスポンス');
-        // console.log(response.data.food);
-        // console.log(response.data.weather);
+        console.log('tweitterレスポンス');
+        console.log(response.data.food);
+        console.log(response.data.weather);
+
         if (!twitterWeatherWrapper.classList.contains("effect-on")) {
           twitterWeatherWrapper.classList.add("effect-on");
         }
@@ -5540,12 +5541,9 @@ new Vue({
         }
 
         var makeTweetHtml = function makeTweetHtml(value, index) {
-          // console.log('makehtml関数内');
-          // console.log(targetDom);
-          targetProperty.push('<a href="https://twitter.com/' + value.user.screen_name + '/status/' + value.id_str + '" class="test-dark" target="_blank"><p><img src="' + value.mediaUrl + '" class="img-fluid"></p><p>' + value.full_text + '</p></a>'); // var element = targetProperty[index];
-          // console.log('makehtml関数内');
-          // console.log(element);
-          // element.fade = "effect-on";
+          var regexp = /https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+/g;
+          full_text = value.full_text.replace(regexp, '');
+          targetProperty.push('<a href="https://twitter.com/' + value.user.screen_name + '/status/' + value.id_str + '" class="test-dark" target="_blank"><p><img src="' + value.mediaUrl + '" class="img-fluid"></p><p>' + full_text + '</p></a>');
         }; //天気
 
 
