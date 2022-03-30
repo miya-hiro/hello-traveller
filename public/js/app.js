@@ -5531,7 +5531,7 @@ new Vue({
 
       axios({
         method: 'GET',
-        url: '/api/weather',
+        url: '/public/api/weather',
         responseType: 'json',
         params: {
           destination: this.selected //!!
@@ -5569,7 +5569,7 @@ new Vue({
       me.twitterFoods = [];
       axios({
         method: 'GET',
-        url: '/api/tweets',
+        url: '/public/api/tweets',
         responseType: 'json',
         params: {
           destination: this.selected //!!
