@@ -5456,11 +5456,59 @@ new Vue({
       text: 'SAPPORO',
       value: '札幌'
     }, {
+      text: 'AKITA',
+      value: '秋田'
+    }, {
+      text: 'IWATE',
+      value: '岩手'
+    }, {
+      text: 'NAGANO',
+      value: '長野'
+    }, {
       text: 'TOKYO',
       value: '東京'
     }, {
+      text: 'TIBA',
+      value: '千葉'
+    }, {
+      text: 'KANAGAWA',
+      value: '神奈川'
+    }, {
+      text: 'TOCHIGI',
+      value: '栃木'
+    }, {
+      text: 'GIFU',
+      value: '岐阜'
+    }, {
+      text: 'ISHIKAWA',
+      value: '石川'
+    }, {
       text: 'OSAKA',
       value: '大阪'
+    }, {
+      text: 'HYOGO',
+      value: '兵庫'
+    }, {
+      text: 'NARA',
+      value: '奈良'
+    }, {
+      text: 'KYOTO',
+      value: '京都'
+    }, {
+      text: 'HIROSHIMA',
+      value: '広島'
+    }, {
+      text: 'OKAYAMA',
+      value: '岡山'
+    }, {
+      text: 'TOKUSHIMA',
+      value: '徳島'
+    }, {
+      text: 'FUKUOKA',
+      value: '福岡'
+    }, {
+      text: 'SAGA',
+      value: '佐賀'
     }, {
       text: 'OKINAWA',
       value: '沖縄'
