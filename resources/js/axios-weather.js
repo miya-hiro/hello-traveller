@@ -1,6 +1,5 @@
 console.log('weather用 JS ココカラ');
 
-
 /**
  * for Vue
  */
@@ -60,9 +59,9 @@ new Vue(
             }
           }
         ).then(function (response) {
-          // console.log('weatherレスポンス');
-          // console.log(response.data.data);
-          // console.log(response.data.icon);
+          console.log('weatherレスポンス');
+          console.log(response.data.data);
+          console.log(response.data.icon);
 
           me.weather = '<div class="col">'
             + '<p>今のお天気：' + response.data.data + '</p>'
