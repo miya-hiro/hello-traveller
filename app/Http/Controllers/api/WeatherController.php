@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class WeatherController extends Controller
 {
     public function getWeather(Request $request)
-    {
+    {dd($request);
         $destination = $request->destination;
 
         $lat = config('const.positions.' . $destination . '.lat');
