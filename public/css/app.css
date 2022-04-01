@@ -11295,32 +11295,41 @@ body {
   display: none;
 }
 
-h3, .h3 {
-  position: relative;
-  padding: 0 65px;
-  text-align: center;
+/**
+/* エレメント
+*/
+.el-block {
+  display: block;
 }
 
+/**
+/*  
+*/
+h3, .h3 {
+  position: relative;
+  padding: 0;
+  text-align: center;
+}
 h3:before, .h3:before {
   position: absolute;
   top: calc(50% - 1px);
   left: 0;
-  width: 100%;
   height: 2px;
   content: "";
   background: #000;
+  margin: 0 calc(50% - 50vw);
+  width: 100vw;
 }
-
 h3 span, .h3 span {
   position: relative;
-  padding: 0 1em;
+  padding: 3px 4px;
   background: #fff;
 }
 
 .select-a {
   background: skyblue;
   height: 40px;
-  width: 300px;
+  width: 100%;
   border-radius: 5px;
   position: relative;
   z-index: 1;
@@ -11366,6 +11375,10 @@ a:hover {
 
 .title a {
   color: lightblue;
+}
+
+.container-fluid, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
+  padding: 0;
 }
 
 .card {
@@ -11423,6 +11436,21 @@ a:hover {
   }
 }
 @media all and (min-width: 768px) {
+  .el-block {
+    display: none;
+  }
+
+  h3, .h3 {
+    padding: 0 65px;
+  }
+  h3:before, .h3:before {
+    margin: 0;
+    width: 100%;
+  }
+
+  .select-a {
+    width: 300px;
+  }
   .select-a select {
     font-size: 18px;
   }
