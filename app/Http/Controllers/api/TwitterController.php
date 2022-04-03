@@ -34,7 +34,7 @@ class TwitterController extends Controller
         return response()->json(
             [
                 'weather' => $tweetWeatherList,
-                'food' => $tweetFoodList,
+                'food'    => $tweetFoodList,
             ]
         );
     }
