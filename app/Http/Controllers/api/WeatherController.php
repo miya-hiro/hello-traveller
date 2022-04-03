@@ -26,10 +26,6 @@ class WeatherController extends Controller
         $weather_json = file_get_contents($url);
         $weather_array = json_decode($weather_json, true);
 
-        // $weather = [];
-        // $weather['weather'] = $weather_array['weather'][0]['main'];
-        // $weather['icon'] = $weather_array['weather'][0]['icon'];
-
         return response()->json(
             [
                 'data' => $weather_array['weather'][0]['main'],
