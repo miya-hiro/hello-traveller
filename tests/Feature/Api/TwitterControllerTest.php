@@ -24,7 +24,7 @@ class TwitterControllerTest extends TestCase
         ];
 
         $response = $this->get('api/tweets', $data);
-dd($response);
+
         $response->assertStatus(200);
     }
 }
