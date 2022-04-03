@@ -21,7 +21,7 @@ class TwitterController extends Controller
     }
 
     public function getTweets(Request $request)
-    {//dd($request->destination);
+    {
         $destination = $request->destination;
 
         //指定ワード
@@ -42,16 +42,15 @@ class TwitterController extends Controller
     private function getTweetByKeywords($destination, $keyword)
     {
         $q =  $destination . $keyword . ' -相互 -手押し filter:images -#相互RT -tele exclude:retweets';
-        // dd($q);
 
         $tweets_params = [
             'q' => $q,
             'count' => config('const.api.twitter.settings.getNum'),
             'tweet_mode' => 'extended', //ここ！(text->full_text) 画像表示が直る
         ];
-        // dd($tweets_params);
+
         $tweetList = $this->connection->get('/search/tweets', $tweets_params)->statuses;
-        // dd($tweetList);
+
         foreach ($tweetList as $tweet) {
             $tweet->mediaUrl = '画像なし'; //初期値
 
