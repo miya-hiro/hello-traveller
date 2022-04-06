@@ -3,24 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 
 class WeatherController extends Controller
 {
     public function getWeather(Request $request)
     {
-        $destination = $request->destination;
-
-        $lat = config('const.positions.' . $destination . '.lat');
-        $lon = config('const.positions.' . $destination . '.lon');
-
-        $appid = config('const.api.weather.key');
-
-        $url = "http://api.openweathermap.org/data/2.5/weather/?lat={$lat}&lon={$lon}&appid={$appid}";
-
-        $weather_json = file_get_contents($url);
-        $weather_array = json_decode($weather_json, true);
+        $weather_array = \WeatherApi::getData($request->destination);
 
         return response()->json(
             [
