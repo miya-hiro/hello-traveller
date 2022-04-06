@@ -18,7 +18,7 @@ class WeatherControllerTest extends TestCase
      * @covers \App\Controllers\Api\TwitterController::getWeather
      */
     public function getWeather()
-    {
+    {//@todo weatherapiをモック
         $data = ['destination' => '東京'];
 
         $response = $this->get(route('getWeather', $data));
