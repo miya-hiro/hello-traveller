@@ -177,6 +177,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /**
+         * 新規追加
+         */
+        App\Providers\WeatherApiServiceProvider::class,
     ],
 
     /*
@@ -191,7 +195,11 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // ...
+        /**
+         * 新規追加
+         */
+        'WeatherApi' => App\Facades\WeatherApi::class,
+
     ])->toArray(),
 
 ];
