@@ -10,15 +10,17 @@ class WeatherController extends Controller
     public function getWeather(Request $request)
     {
         $weather_array = \WeatherApi::getData($request->destination);
-
-        return response()->json(
-            [
-                'data' => $weather_array['weather'][0]['main'],
-                'icon' => $weather_array['weather'][0]['icon'],
-            ]
-        );
-
-         //天気取得に必要なデータ取得URL
-        // $url = "http://api.openweathermap.org/geo/1.0/direct?q=Sapporo&limit=5&appid={$appid}";
+        // dd($weather_array);
+        if (isset($weather_array['weather'])) {
+            // dd('exist');
+            return response()->json(
+                [
+                    'data' => $weather_array['weather'][0]['main'],
+                    'icon' => $weather_array['weather'][0]['icon'],
+                ]
+            );
+        } else {
+            throw new \Exception;
+        }
     }
 }

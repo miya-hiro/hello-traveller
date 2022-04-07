@@ -15,5 +15,9 @@ class WeatherApi
     $weather_json = file_get_contents($url);
 
     return json_decode($weather_json, true);
+
+    //天気取得に必要なデータ取得URL
+    // $url = "http://api.openweathermap.org/geo/1.0/direct?q=Sapporo&limit=5&appid={$appid}";
+
   }
 }

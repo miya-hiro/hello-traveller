@@ -18,7 +18,22 @@ class WeatherControllerTest extends TestCase
      * @covers \App\Controllers\Api\TwitterController::getWeather
      */
     public function getWeather()
-    {//@todo weatherapiをモック
+    { //@todo weatherapiをモック
+
+        $responceData = [
+            'weather' => [
+                [
+                    'main' => '',
+                    'icon' => '',
+                ]
+            ]
+        ];
+
+        \WeatherApi::shouldReceive('getData')
+            ->once()
+            ->with(\Mockery::type('string'))
+            ->andReturn($responceData);
+
         $data = ['destination' => '東京'];
 
         $response = $this->get(route('getWeather', $data));
@@ -27,5 +42,25 @@ class WeatherControllerTest extends TestCase
         $response->assertStatus(200);
         $this->assertArrayHasKey('data', $actual);
         $this->assertArrayHasKey('icon', $actual);
+    }
+
+    /**
+     * @test
+     * @covers \App\Controllers\Api\TwitterController::getWeather
+     */
+    public function getWeather_error()
+    {
+        $responceData =  ['error'];
+
+        \WeatherApi::shouldReceive('getData')
+            ->once()
+            ->with(\Mockery::type('string'))
+            ->andReturn($responceData);
+
+        $data = ['destination' => '東京'];
+
+        $response = $this->get(route('getWeather', $data));
+
+        $response->assertStatus(500);
     }
 }
