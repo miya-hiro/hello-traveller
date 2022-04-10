@@ -181,6 +181,7 @@ return [
          * 新規追加
          */
         App\Providers\WeatherApiServiceProvider::class,
+        App\Providers\TwitterApiServiceProvider::class,
     ],
 
     /*
@@ -199,6 +200,7 @@ return [
          * 新規追加
          */
         'WeatherApi' => App\Facades\WeatherApi::class,
+        'TwitterApi' => App\Facades\TwitterApi::class,
 
     ])->toArray(),
 
