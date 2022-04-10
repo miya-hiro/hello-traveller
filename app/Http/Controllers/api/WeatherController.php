@@ -12,7 +12,7 @@ class WeatherController extends Controller
         $weather_array = \WeatherApi::getData($request->destination);
         // dd($weather_array);
         if (isset($weather_array['weather'])) {
-            // dd('exist');
+
             return response()->json(
                 [
                     'data' => $weather_array['weather'][0]['main'],
@@ -20,6 +20,7 @@ class WeatherController extends Controller
                 ]
             );
         } else {
+
             throw new \Exception;
         }
     }
