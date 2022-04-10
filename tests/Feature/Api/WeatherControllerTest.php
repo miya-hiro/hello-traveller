@@ -18,8 +18,7 @@ class WeatherControllerTest extends TestCase
      * @covers \App\Controllers\Api\TwitterController::getWeather
      */
     public function getWeather()
-    { //@todo weatherapiをモック
-
+    {
         $responceData = [
             'weather' => [
                 [

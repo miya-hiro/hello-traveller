@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //頭にapiがつく
-Route::get('/tweets', [TwitterController::class, 'getTweets']); //get-とかいらない
+Route::get('/tweets', [TwitterController::class, 'getTweets'])->name('getTweets');; //get-とかいらない
 Route::get('/weather', [WeatherController::class, 'getWeather'])->name('getWeather'); //get-とかいらない
 
 // Route::get('/tweets/{id}', [WeatherController::class, 'getTweet']); //get-とかいらない

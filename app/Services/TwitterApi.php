@@ -10,15 +10,15 @@ class TwitterApi
 
   public function __construct()
   {
-      $this->connection = new TwitterOAuth(
-          config('const.api.twitter.key'),
-          config('const.api.twitter.key_secret'),
-          config('const.api.twitter.access_token'),
-          config('const.api.twitter.access_token_secret')
-      );
+    $this->connection = new TwitterOAuth(
+      config('const.api.twitter.key'),
+      config('const.api.twitter.key_secret'),
+      config('const.api.twitter.access_token'),
+      config('const.api.twitter.access_token_secret')
+    );
   }
 
-  public function getTweets($destination, $keyword): array
+  public function getTweets($destination, $keyword)
   {
     $q =  $destination . $keyword . ' -相互 -手押し filter:images -#相互RT -tele exclude:retweets';
 
@@ -29,6 +29,12 @@ class TwitterApi
     ];
 
     $tweetList = $this->connection->get('/search/tweets', $tweets_params)->statuses;
+
+    //データ取得できなかった場合
+    if (isset($tweetList['error'])) {
+
+      return false;
+    }
 
     foreach ($tweetList as $tweet) {
       $tweet->mediaUrl = '画像なし'; //初期値
