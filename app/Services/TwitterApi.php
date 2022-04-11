@@ -31,7 +31,7 @@ class TwitterApi
     $tweetList = $this->connection->get('/search/tweets', $tweets_params);
 
     //データ取得できなかった場合
-    if ( property_exists($tweetList,'errors')) {
+    if (property_exists($tweetList, 'errors')) {
 
       return false;
     }
@@ -52,6 +52,6 @@ class TwitterApi
       }
     }
 
-    return $tweetList;
+    return $tweetList->statuses;
   }
 }

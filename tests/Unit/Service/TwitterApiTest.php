@@ -14,16 +14,7 @@ class TwitterApiTest extends TestCase
     {
         parent::setUp();
 
-        $mock = \Mockery::mock(TwitterOAuth::class);
-        $mock->shouldReceive('get')
-            ->andReturn((object) ['errors' => []]);
-
-        $this->app->bind(TwitterOAuth::class, function () use ($mock) {
-            return $mock;
-        });
-
         $this->sut = new TwitterApi;
-        $this->sut->connection = $mock;
     }
 
     /**
@@ -31,9 +22,36 @@ class TwitterApiTest extends TestCase
      */
     public function getTweets()
     {
-        // dd($this->sut);
+        $mock = \Mockery::mock(TwitterOAuth::class);
+        $mock->shouldReceive('get')
+            ->andReturn((object) [
+                'statuses' =>
+                [
+                    (object)['data1'],
+                    (object)['data2']
+                ]
+            ]);
+
+        $this->sut->connection = $mock;
+
         $actual = $this->sut->getTweets('東京', 'test');
 
-        $this->assertEquals(false, );
+        $this->assertCount(2, $actual);
+    }
+
+    /**
+     * @test
+     */
+    public function getTweets_error()
+    {
+        $mock = \Mockery::mock(TwitterOAuth::class);
+        $mock->shouldReceive('get')
+            ->andReturn((object) ['errors' => []]);
+
+        $this->sut->connection = $mock;
+
+        $actual = $this->sut->getTweets('東京', 'test');
+
+        $this->assertEquals(false, $actual);
     }
 }
