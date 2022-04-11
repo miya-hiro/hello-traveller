@@ -6,7 +6,7 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 
 class TwitterApi
 {
-  private $connection;
+  public $connection; //privateでない...
 
   public function __construct()
   {
@@ -18,7 +18,7 @@ class TwitterApi
     );
   }
 
-  public function getTweets($destination, $keyword)
+  public function getTweets(string $destination, string $keyword)
   {
     $q =  $destination . $keyword . ' -相互 -手押し filter:images -#相互RT -tele exclude:retweets';
 
@@ -28,15 +28,15 @@ class TwitterApi
       'tweet_mode' => 'extended', //ここ！(text->full_text) 画像表示が直る
     ];
 
-    $tweetList = $this->connection->get('/search/tweets', $tweets_params)->statuses;
+    $tweetList = $this->connection->get('/search/tweets', $tweets_params);
 
     //データ取得できなかった場合
-    if (isset($tweetList['error'])) {
+    if ( property_exists($tweetList,'errors')) {
 
       return false;
     }
 
-    foreach ($tweetList as $tweet) {
+    foreach ($tweetList->statuses as $tweet) {
       $tweet->mediaUrl = '画像なし'; //初期値
 
       //画像urlを取得

@@ -4,7 +4,7 @@ namespace App\Services;
 
 class WeatherApi
 {
-  public function getData($destination): array
+  public function getData(string $destination): array
   {
     $lat = config('const.positions.' . $destination . '.lat');
     $lon = config('const.positions.' . $destination . '.lon');
