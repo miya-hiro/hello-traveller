@@ -25,12 +25,9 @@ class TwitterControllerTest extends TestCase
 
         \TwitterApi::shouldReceive('getTweets')
             ->times(2)
-            // ->with(\Mockery::on(function ($argument) {
-            //     $this->assertIsString($argument[0]);
-            //     $this->assertIsString($argument[1]);
-
-            //     return true;
-            // }))
+            ->withArgs(function ($d, $t) {
+                return is_string($d) && is_string($t);
+            })
             ->andReturn($responceData);
 
         $data = [
