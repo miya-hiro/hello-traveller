@@ -6,7 +6,7 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 
 class TwitterApi
 {
-  public $connection; //privateでない...
+  private $connection;
 
   public function __construct()
   {
