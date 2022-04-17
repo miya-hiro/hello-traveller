@@ -31,22 +31,16 @@
 
               <div class="container-fluid">
 
-                <div id="js-weather" class="effect-fade mt-5 text-center">
+                <!-- コンポーネント化。渡すデータだけ変えれば良いようにする -->
+                <tweet-list :items="twitterWeathers">Tweets about "weather"</tweet-list>
+                <tweet-list :items="twitterFoods">Tweets about "Oishi"</tweet-list>
+
+                <!-- <div id="js-weather" class="effect-fade mt-5 text-center">
                   <h3 class="mb-2"><span>Current weather</span></h3>
                   <div class="weather-card">
                     <div v-html="weather" class="row">
                     </div>
-                  </div> <!-- /.card-wrappder -->
-                </div>
-
-                <div id="js-twitterWeatherWrap" class="effect-fade mt-5 text-center">
-                  <h3 class="mb-3"><span>Tweets about weather</span></h3>
-                  <div class="card-wrappder">
-                    <ul class="row list-unstyled">
-                      <li v-html="twitterWeather" v-for="twitterWeather of twitterWeathers" :key="twitterFood" class="col-sm-6 col-md-4 col-lg-3">
-                      </li>
-                    </ul>
-                  </div> <!-- /.card-wrappder -->
+                  </div> 
                 </div>
 
                 <div id="js-twitterFoodWrap" class="effect-fade mt-5 text-center">
@@ -56,8 +50,8 @@
                       <li v-html="twitterFood" v-for="twitterFood of twitterFoods" :key="twitterFood" class="col-sm-6 col-md-4 col-lg-3">
                       </li>
                     </ul>
-                  </div> <!-- /.card-wrappder -->
-                </div>
+                  </div>
+                </div> -->
 
               </div> <!-- /.container-fluid -->
             </div> <!-- ここまでAxios -->
@@ -70,7 +64,7 @@
 
   <transition>
     <div id="btn" class="Page-Btn" v-if="scroll" @click="scrollTop">
-    TOP
+      TOP
     </div>
   </transition>
 </div>

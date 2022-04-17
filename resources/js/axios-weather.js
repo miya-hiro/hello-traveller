@@ -1,5 +1,24 @@
 console.log('weather用 JS ココカラ');
 
+Vue.component('tweet-list', { //1
+  props: ['items'],
+  template: `
+  <div class="effect-fade mt-5 text-center">
+  <h3 class="mb-3"><span><slot/></span></h3>
+  <div class="card-wrappder">
+    <ul class="row list-unstyled">
+      <li v-for="(item,index) in items" :key="index" class="col-sm-6 col-md-4 col-lg-3">
+        <a href="https://twitter.com/'item.user.screen_name'/status/'item.id_str'" class="test-dark" target="_blank">
+          <p><img src="item.mediaUrl" class="img-fluid"></p>
+          <p>{{ item.full_text }}</p>
+        </a>
+      </li>
+    </ul>
+  </div> <!-- /.card-wrappder -->
+</div>
+`
+})
+
 /**
  * for Vue
  */
@@ -43,11 +62,11 @@ new Vue(
       getWeather: function (v) {
         const me = this //!!!!!
 
-        const parentDiv = document.getElementById("js-weather");
+        // const parentDiv = document.getElementById("js-weather");
 
-        if (parentDiv.classList.contains("effect-on")) {
-          parentDiv.classList.remove("effect-on")
-        }
+        // if (parentDiv.classList.contains("effect-on")) {
+        //   parentDiv.classList.remove("effect-on")
+        // }
 
         axios(
           {
@@ -75,7 +94,7 @@ new Vue(
           me.weather = 'エラーが発生しました';
         }).finally(function () {
 
-          parentDiv.classList.add("effect-on")
+          // parentDiv.classList.add("effect-on")
         });
 
       },
@@ -87,14 +106,14 @@ new Vue(
         const twitterFoodWrapper = document.getElementById("js-twitterFoodWrap");
 
         //リセット
-        if (twitterWeatherWrapper.classList.contains("effect-on")) {
-          twitterWeatherWrapper.classList.remove("effect-on")
-        }
-        me.twitterWeathers = [];
+        // if (twitterWeatherWrapper.classList.contains("effect-on")) {
+        //   twitterWeatherWrapper.classList.remove("effect-on")
+        // }
+        // me.twitterWeathers = [];
 
-        if (twitterFoodWrapper.classList.contains("effect-on")) {
-          twitterFoodWrapper.classList.remove("effect-on")
-        }
+        // if (twitterFoodWrapper.classList.contains("effect-on")) {
+        //   twitterFoodWrapper.classList.remove("effect-on")
+        // }
         me.twitterFoods = [];
 
 
@@ -107,39 +126,44 @@ new Vue(
               destination: this.selected //!!
             }
           }
-        ).then(function (response) {
+        ).then(function (response) { //200の場合
           console.log('tweitterレスポンス');
           console.log(response.data.food);
           console.log(response.data.weather);
 
 
-          if (!twitterWeatherWrapper.classList.contains("effect-on")) {
-            twitterWeatherWrapper.classList.add("effect-on")
-          }
-          if (!twitterFoodWrapper.classList.contains("effect-on")) {
-            twitterFoodWrapper.classList.add("effect-on")
-          }
+          // if (!twitterWeatherWrapper.classList.contains("effect-on")) {
+          //   twitterWeatherWrapper.classList.add("effect-on")
+          // }
+          // if (!twitterFoodWrapper.classList.contains("effect-on")) {
+          //   twitterFoodWrapper.classList.add("effect-on")
+          // }
 
-          const makeTweetHtml = function (value, index) {
+          // const makeTweetHtml = function (value, index) {
 
-            let regexp = /https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+/g;
-            full_text = value.full_text.replace(regexp, '');
+          //   //
+          //   let regexp = /https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+/g;
+          //   full_text = value.full_text.replace(regexp, '');
 
-            targetProperty.push('<a href="https://twitter.com/' + value.user.screen_name + '/status/' + value.id_str + '" class="test-dark" target="_blank"><p><img src="' + value.mediaUrl + '" class="img-fluid"></p><p>' + full_text + '</p></a>');
-          };
+          //   targetProperty.push('<a href="https://twitter.com/' + value.user.screen_name + '/status/' + value.id_str + '" class="test-dark" target="_blank"><p><img src="' + value.mediaUrl + '" class="img-fluid"></p><p>' + full_text + '</p></a>');
+          // };
 
-          //天気
-          var targetProperty = me.twitterWeathers;
+          // //天気
+          // var targetProperty = me.twitterWeathers;
 
-          response.data.weather.forEach(makeTweetHtml);
+          // response.data.weather.forEach(makeTweetHtml);
 
+
+          this.twitterWeathers = response.data.weather;
 
           //食べ物
-          var targetProperty = me.twitterFoods;
+          this.twitterFoods = response.data.food;
 
-          response.data.food.forEach(makeTweetHtml);
+          // var targetProperty = me.twitterFoods;
 
-        }).catch(function (response) {
+          // response.data.food.forEach(makeTweetHtml);
+
+        }).catch(function (response) { //500とか 
           console.log(response);
           console.log('inキャッチ');
 
