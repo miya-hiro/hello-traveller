@@ -8,14 +8,9 @@ class TwitterApi
 {
   private $connection;
 
-  public function __construct()
+  public function __construct(TwitterOAuth $twitterOAuth)
   {
-    $this->connection = new TwitterOAuth(
-      config('const.api.twitter.key'),
-      config('const.api.twitter.key_secret'),
-      config('const.api.twitter.access_token'),
-      config('const.api.twitter.access_token_secret')
-    );
+    $this->connection = $twitterOAuth;
   }
 
   public function getTweets(string $destination, string $keyword)

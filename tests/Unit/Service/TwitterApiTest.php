@@ -8,21 +8,6 @@ use Tests\TestCase;
 
 class TwitterApiTest extends TestCase
 {
-    private $sut;
-    private $property;
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->sut = new TwitterApi;
-
-        //privateプロパティへのアクセスを可能に
-        $reflectionClass = new \ReflectionClass(get_class($this->sut));
-        $this->property = $reflectionClass->getProperty('connection');
-        $this->property->setAccessible(true);
-    }
-
     /**
      * @test
      */
@@ -38,12 +23,13 @@ class TwitterApiTest extends TestCase
                 ]
             ]);
 
-        //privateプロパティへのアクセスを可能に
-        $this->property->setValue($this->sut, $mock);
+        $sut = new TwitterApi($mock);
 
-        $actual = $this->sut->getTweets('東京', 'test');
+        $actual = $sut->getTweets('東京', 'test');
 
         $this->assertCount(2, $actual);
+
+        //形が欲しい形かチェックする
     }
 
     /**
@@ -55,10 +41,9 @@ class TwitterApiTest extends TestCase
         $mock->shouldReceive('get')
             ->andReturn((object) ['errors' => []]);
 
-        //privateプロパティへのアクセスを可能に
-        $this->property->setValue($this->sut, $mock);
+        $sut = new TwitterApi($mock);
 
-        $actual = $this->sut->getTweets('東京', 'test');
+        $actual = $sut->getTweets('東京', 'test');
 
         $this->assertEquals(false, $actual);
     }

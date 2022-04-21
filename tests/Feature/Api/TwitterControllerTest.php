@@ -8,11 +8,6 @@ use Tests\TestCase;
 
 class TwitterControllerTest extends TestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-    }
-
     /**
      * @test
      * @covers \App\Controllers\Api\TwitterController::getTweets
